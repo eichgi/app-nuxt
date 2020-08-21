@@ -1,13 +1,14 @@
 <template>
   <div class="admin-new-post-page">
     <div class="new-post-form">
-      <AdminPostForm/>
+      <AdminPostForm @submit="onSubmitted"/>
     </div>
   </div>
 </template>
 
 <script>
 import AdminPostForm from "~/components/Admin/AdminPostForm";
+import axios from 'axios';
 
 export default {
   name: "index",
@@ -16,7 +17,12 @@ export default {
   data() {
     return {}
   },
-  methods: {}
+  methods: {
+    async onSubmitted(postData) {
+      await this.$store.dispatch('addPost', postData);
+      await this.$router.push('/admin');
+    },
+  }
 }
 </script>
 

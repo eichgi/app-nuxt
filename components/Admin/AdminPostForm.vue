@@ -2,7 +2,8 @@
   <form @submit.prevent="onSave">
     <AppInputControl v-model="editedPost.author">Author Name</AppInputControl>
     <AppInputControl v-model="editedPost.title">Title</AppInputControl>
-    <AppInputControl v-model="editedPost.thumbnailLink">Thumbnail Link</AppInputControl>
+    <AppInputControl v-model="editedPost.thumbnail">Thumbnail Link</AppInputControl>
+    <AppInputControl control-type="textarea" v-model="editedPost.previewText">Preview</AppInputControl>
     <AppInputControl control-type="textarea" v-model="editedPost.content">Content</AppInputControl>
     <AppButton type="submit">Save</AppButton>
     <AppButton type="button" style="margin-left: 10px" btn-style="cancel" @click="onCancel">Cancel</AppButton>
@@ -25,16 +26,18 @@ export default {
   data() {
     return {
       editedPost: this.post ? {...this.post} : {
-        author: '',
-        title: '',
-        thumbnailLink: '',
-        content: '',
+        author: 'Hiram X',
+        title: 'Title X',
+        thumbnail: 'https://placeimg.com/640/480/any',
+        content: 'lorem ipsum......',
+        previewText: 'preview!',
       },
     }
   },
   methods: {
     onSave() {
       //Save the post
+      this.$emit('submit', this.editedPost);
     },
     onCancel() {
       //Go back

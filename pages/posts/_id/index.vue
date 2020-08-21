@@ -17,22 +17,18 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "index",
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPost: {
-          id: '1',
-          title: 'Awesome Pozt! (ID: ' + context.params.id + ')',
-          previewText: 'lorem ipsum....',
-          author: 'User X',
-          updatedDate: new Date(),
-          content: 'lorem ipsum looooooooooong',
-          thumbnail: 'https://placeimg.com/640/480/tech',
-        },
-      });
-    }, 1000);
+  asyncData(context) {
+    return axios.get('https://nuxtapp-e69a7.firebaseio.com/posts/' + context.params.id + '.json')
+      .then(res => {
+        console.log(res);
+        return {
+          loadedPost: res.data,
+        }
+      }).catch(e => context.error(e));
   }
 }
 </script>
