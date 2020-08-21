@@ -1,12 +1,12 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1>Title of the Post</h1>
+      <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on</div>
-        <div class="post-detail">Written by XYZ</div>
+        <div class="post-detail">Last updated on {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
-      <p>Content of the post</p>
+      <p class="post-content">{{ loadedPost.content }}</p>
     </section>
     <section class="post-feedback">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid eum iure nostrum quis, quisquam quos ullam!
@@ -18,7 +18,22 @@
 
 <script>
 export default {
-  name: "index"
+  name: "index",
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPost: {
+          id: '1',
+          title: 'Awesome Pozt! (ID: ' + context.params.id + ')',
+          previewText: 'lorem ipsum....',
+          author: 'User X',
+          updatedDate: new Date(),
+          content: 'lorem ipsum looooooooooong',
+          thumbnail: 'https://placeimg.com/640/480/tech',
+        },
+      });
+    }, 1000);
+  }
 }
 </script>
 

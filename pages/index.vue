@@ -3,7 +3,7 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <PostList isAdmin/>
+    <PostList :posts="loadedPosts"/>
   </div>
 </template>
 
@@ -14,6 +14,41 @@ import PostList from "~/components/Posts/PostList";
 export default {
   name: 'index',
   components: {PostList},
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    },
+  },
+  /*asyncData(context, callback) {
+    console.log(context);
+    console.log('async data executed');
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {
+            id: '1',
+            title: 'Awesome Pozt!',
+            previewText: 'lorem ipsum....',
+            thumbnail: 'https://placeimg.com/640/480/tech',
+          },
+          {
+            id: '2',
+            title: 'Zwitte Pozt!',
+            previewText: 'lorem ipsum....',
+            thumbnail: 'https://placeimg.com/640/480/tech',
+          }
+        ],
+      })
+    }, 1500);
+  },*/
+  /*data() {
+    return {
+
+    }
+  },*/
+  created() {
+
+  }
 }
 </script>
 

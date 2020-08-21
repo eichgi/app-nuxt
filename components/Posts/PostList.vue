@@ -1,15 +1,11 @@
 <template>
   <section class="post-list">
-    <PostPreview id="1"
+    <PostPreview v-for="post in posts" :key="post.id"
+                 :id="post.id"
                  :is-admin="isAdmin"
-                 title="¿Donde están perros?"
-                 thumbnail="https://placeimg.com/640/480/tech"
-                 preview-text="First post"/>
-    <PostPreview id="1"
-                 :is-admin="isAdmin"
-                 title="¿Donde están perros?"
-                 thumbnail="https://placeimg.com/640/480/tech"
-                 preview-text="First post"/>
+                 :title="post.title"
+                 :thumbnail="post.thumbnail"
+                 :preview-text="post.previewText"/>
   </section>
 </template>
 
@@ -20,8 +16,14 @@ export default {
   name: "PostList",
   components: {PostPreview},
   props: {
-    isAdmin: Boolean,
-    default: false,
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    posts: {
+      type: Array,
+      required: true,
+    }
   }
 }
 </script>
