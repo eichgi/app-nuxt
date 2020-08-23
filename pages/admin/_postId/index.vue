@@ -13,6 +13,7 @@ import axios from 'axios';
 export default {
   name: "index",
   layout: 'admin',
+  middleware: ['check-auth', 'auth'],
   components: {AdminPostForm},
   asyncData(context) {
     return axios.get('https://nuxtapp-e69a7.firebaseio.com/posts/' + context.params.postId + '.json')

@@ -10,6 +10,7 @@
 import PostList from "~/components/Posts/PostList";
 
 export default {
+  //middleware: 'log',
   name: "index",
   components: {PostList},
   /*asyncData(context) {

@@ -1,3 +1,5 @@
+const bodyParser = require('body-parser');
+
 export default {
   /*
   ** Nuxt rendering mode
@@ -28,12 +30,17 @@ export default {
   /*
   ** Global CSS
   */
-  css: [],
+  css: [
+    '~assets/styles/main.css',
+  ],
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
-  plugins: [],
+  plugins: [
+    '~plugins/core-components.js',
+    '~plugins/date-filter.js',
+  ],
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
@@ -51,5 +58,26 @@ export default {
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
-  build: {}
+  build: {},
+  loading: {
+    color: 'snow',
+    height: '5px'
+  },
+  loadingIndicator: {
+    name: 'circle',
+    color: '#3B8070',
+    background: 'black'
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://nuxtapp-e69a7.firebaseio.com',
+    fbAPIKey: 'AIzaSyCg4-VJveHmg0nSocbMVk0Bl7JbnS_K2pI',
+  },
+  transitions: {
+    name: 'fade',
+    mode: 'out-in',
+  },
+  serverMiddleware: [
+    bodyParser.json(),
+    '~/api',
+  ],
 }
